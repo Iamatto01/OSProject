@@ -63,8 +63,21 @@ https://github.com/Iamatto01/OSProject/tree/main
 ***Questions:***
 
 1. What is default OS used to run the virtual environment for codespaces. ***(1 mark)*** __Fill answer here__.
+
+Codespaces uses Linux as the default OS to run the virtual environment.
+
+
 2. What are the two options of ram, disk and vcpu configuration you can have in running codespaces . ***(1 mark)*** __Fill answer here__.
+
+The two common configurations for Codespaces are:
+4-core machine: 8 GB RAM, 32 GB disk
+8-core machine: 16 GB RAM, 64 GB disk
+
+
 3. Why must we commit and sync our current work on source control? ***(1 mark)*** __Fill answer here__.
+
+Committing and syncing ensures that all changes are saved and pushed to the main repository, preventing any loss of work and keeping the repository updated for collaboration and version tracking.
+
 
 ## Exploring the Terminal
 
