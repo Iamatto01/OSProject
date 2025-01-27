@@ -29,8 +29,8 @@ https://github.com/Iamatto01/OSProject/tree/main
 
 2. How many files and folders are in this repository. ***(1 mark)*** 
 
-
-
+1 folder 
+7 files
 
 
 ## Exploring github codespaces
