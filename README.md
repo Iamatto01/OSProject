@@ -379,23 +379,42 @@ Linux codespaces-572423 6.5.0-1025-azure #26~22.04.1-Ubuntu SMP Thu Jul 11 22:33
 
        142Mi
        
-12. What is the available disk space mounted on /workspace. ***(1 mark)*** __Fill answer here__.
+    12. What is the available disk space mounted on /workspace. ***(1 mark)*** __Fill answer here__.
+
+    20447984 Kb
+    
+    13. Name the version and hardware architecture of the linux Virtual environment. ***(1 mark)*** __Fill answer here__.
+    
+    Version: 6.5.0-1025-azure (Linux kernel version)
+    Hardware Architecture: x86_64 (64-bit architecture)
 
 
-13. Name the version and hardware architecture of the linux Virtual environment. ***(1 mark)*** __Fill answer here__.
+    14. What is the difference between **ls** vs **ls -asl**. ***(1 mark)*** __Fill answer here__.
+
+        ls: Lists the contents of a directory.
+    ls -asl:
+    -a: Shows all files, including hidden files (those starting with .).
+    -s: Displays the size of each file in blocks.
+    -l: Displays detailed information (permissions, owner, size, etc.).
 
 
-14. What is the difference between **ls** vs **ls -asl**. ***(1 mark)*** __Fill answer here__.
+    15. What is the TLB size of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
+    
+    2560 4K pages.
 
 
-15. What is the TLB size of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
+    16. What is the CPU speed of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
+
+    The CPU speed of the Virtual CPU is:
+        3182.282 MHz for processor 0
+        2737.351 MHz for processor 1
 
 
-16. What is the CPU speed of the Virtual CPU. ***(1 mark)*** __Fill answer here__.
-
-
-17. What is the top running process that consumes the most CPU cycles. ***(1 mark)*** __Fill answer here__.
-
+    17. What is the top running process that consumes the most CPU cycles. ***(1 mark)*** __Fill answer here__.
+ 
+    COMMAND: node
+    PID: 2110
+    CPU Usage: 4.0%
 
 
 ## Running your own container instance.
