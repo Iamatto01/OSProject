@@ -1,6 +1,6 @@
 # OSProject Running Containers for Application Development
 
-Group Name: atto
+Group Name: os
 
 Section: 7 
 
