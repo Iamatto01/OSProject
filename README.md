@@ -797,9 +797,29 @@ You have now set up a Node.js application in a Docker container on nodejsnet net
 ***Questions:***
 
 1. What is the output of step 5 above, explain the error? ***(1 mark)*** __Fill answer here__.
+
+Server Error
+
+If the mytable table hasn't been created and populated with data, the MySQL server will return an error indicating that the table does not exist. Since no data is available, the Node.js application will respond with a "Server Error."
+
+  
 2. Show the instruction needed to make this work. ***(1 mark)*** __Fill answer here__.
 
+docker exec -it mysql-container mysql -u myuser -p
 
+use mydatabase;
+
+CREATE TABLE mytable (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  value VARCHAR(255) NOT NULL
+);
+
+INSERT INTO mytable (name, value) VALUES ('example1', 'value1'), ('example2', 'value2'), ('example3', 'value3');
+
+exit
+
+curl http://localhost:3000/random
 
 ## What to submit
 
