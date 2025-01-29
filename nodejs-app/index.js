@@ -35,6 +35,10 @@ app.get('/random', (req, res) => {
       res.status(500).send('Server Error');
       return;
     }
+    if (results.length === 0) {
+      res.status(404).send('No data found');
+      return;
+    }
     res.json(results[0]);
   });
 });
