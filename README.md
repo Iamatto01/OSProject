@@ -504,6 +504,9 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 ***Questions:***
 
 1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Fill answer here__.
+
+The files created in myroot will have the owner and group set as root:root because the container runs as the root user by default. 
+
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
@@ -511,6 +514,12 @@ sudo chown -R codespace:codespace myroot
 
 ```
 *** __Fill answer here__.***
+
+
+Yes, the file ownership can be changed to the user codespace using sudo chown -R codespace:codespace myroot.
+
+
+
 
 ## You are on your own, create your own static webpage
 
@@ -537,8 +546,24 @@ docker run --detach -v /workspaces/OSProject/webpage:/usr/local/apache2/htdocs/ 
 ***Questions:***
 
 1. What is the permission of folder /usr/local/apache/htdocs and what user and group owns the folder? . ***(2 mark)*** __Fill answer here__.
+
+docker exec -it zealous_hamilton ls -ld /usr/local/apache2/htdocs
+
+Permission: drwxrwxrwx+
+d indicates it is a directory.
+rwxrwxrwx means the directory has full permissions for the owner, group, and others (read, write, execute).
+The + indicates extended ACLs (Access Control Lists) are set on the directory.
+User and Group Ownership:
+User ID: 1000
+Group ID: 1000
+
 2. What port is the apache web server running. ***(1 mark)*** __Fill answer here__.
+
+The Apache web server is running on port 80 inside the container. //8080 for host machine
+
 3. What port is open for http protocol on the host machine? ***(1 mark)*** __Fill answer here__.
+
+ The open port for HTTP on the host machine is port 8080, which maps to port 80 in the container due to the -p 8080:80 flag used during the docker run command.
 
 ## Create SUB Networks
 
@@ -558,10 +583,41 @@ docker run -itd --net rednet --name c2 busybox sh
 ***Questions:***
 
 1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** __Fill answer here__.
+
+Busybox: BusyBox is a lightweight, multi-purpose utility for embedded Linux systems. It provides a minimal set of Unix utilities
+         like sh, ls and ping in a single binary, ideal for minimal environments like containers.
+
+--name: The --name flag in Docker is used to assign a specific name to the container, making it easier to reference.
+        If no name is provided, Docker assigns a random name.
+
+
 2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)*** __Fill answer here__.
+
+@Iamatto01 ➜ /workspaces/OSProject (main) $ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+930c32113ed9   bluenet   bridge    local
+cb4c16d2cadd   bridge    bridge    local
+3c8a0915a23f   host      host      local
+17a807a954a7   none      null      local
+480eed6ef3ba   rednet    bridge    local
+
+
 3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** __Fill answer here__.
+
+bluenet = "Gateway": "172.18.0.1",
+rednet  = "Gateway": "172.19.0.1",
+
 4. What is the network address for the running container c1 and c2? ***(1 mark)*** __Fill answer here__.
+
+bluenet = "IPAddress": "172.18.0.2",
+rednet  = "IPAddress": "172.19.0.2",
+
 5. Using the command ```docker exec c1 ping c2```, which basically tries to do a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
+
+
+@Iamatto01 ➜ /workspaces/OSProject (main) $ docker exec c1 ping c2
+ping: bad address 'c2'
+
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks
@@ -574,7 +630,30 @@ docker exec c1 ping c2
 ***Questions:***
 
 1. Are you able to ping? Show your output . ***(1 mark)*** __Fill answer here__.
+
+@Iamatto01 ➜ /workspaces/OSProject (main) $ docker exec c1 ping c2
+PING c2 (172.20.0.3): 56 data bytes
+64 bytes from 172.20.0.3: seq=0 ttl=64 time=0.135 ms
+64 bytes from 172.20.0.3: seq=1 ttl=64 time=0.078 ms
+64 bytes from 172.20.0.3: seq=2 ttl=64 time=0.075 ms
+64 bytes from 172.20.0.3: seq=3 ttl=64 time=0.089 ms
+64 bytes from 172.20.0.3: seq=4 ttl=64 time=0.092 ms
+64 bytes from 172.20.0.3: seq=5 ttl=64 time=0.064 ms
+^Z
+[1]+  Stopped                 docker exec c1 ping c2
+
 2. What is different from the previous ping in the section above? ***(1 mark)*** __Fill answer here__.
+
+Previous ping :
+
+The containers c1 and c2 were in separate networks (bluenet and rednet).
+Docker isolates networks by default, so c1 couldn't resolve the address c2.
+
+Current ping:
+
+Both containers were connected to a common network (bridgenet) in addition to their original networks.
+The common network allows them to communicate, so ping works successfully, with the IP address of c2 being resolved .
+
 
 ## Intermediate Level (10 marks bonus)
 
